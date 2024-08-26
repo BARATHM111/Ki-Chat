@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ki-Chatbot</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <style>
+        .chat-container {
+            height: calc(100vh - 160px);
+        }
+        .dark {
+            background-color: #1a202c;
+            color: #e2e8f0;
+        }
+        .dark .bg-white {
+            background-color: #2d3748;
+        }
+        .dark .bg-gray-200 {
+            background-color: #4a5568;
+        }
+        .dark .text-gray-700 {
+            color: #e2e8f0;
+        }
+        .dark .border-gray-300 {
+            border-color: #4a5568;
+        }
+        .dark .hover\:bg-gray-300:hover {
+            background-color: #4a5568;
+        }
+        .dark .bg-blue-500,
+        .dark .bg-purple-500 {
+            background-color: #9f7aea;
+        }
+        .dark .hover\:bg-blue-600:hover,
+        .dark .hover\:bg-purple-600:hover {
+            background-color: #805ad5;
+        }
+        .title-container {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+        .app-title {
+            font-size: 1.875rem; /* equivalent to text-3xl */
+            font-weight: 700; /* equivalent to font-bold */
+            color: #1a202c; /* Dark color for light mode */
+        }
+        .dark .app-title {
+            color: #9f7aea; /* Purple color for dark mode */
+        }
+        .chat-history-container {
+            max-height: calc(100vh - 180px);
+            overflow-y: auto;
+        }
+        .chat-history-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            margin-bottom: 5px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            justify-content: space-between;
+        }
+        .chat-history-item:hover {
+            background-color: rgba(156, 163, 175, 0.1);
+        }
+        .chat-icon {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 transition-colors duration-200">
+    <div class="title-container">
+        <h1 class="app-title">Ki-Chatbot</h1>
+    </div>
+    <div class="container mx-auto p-4 flex h-screen pt-16">
+        <!-- Sidebar -->
+        <div class="w-1/4 bg-gray-200 dark:bg-gray-800 p-4 mr-4 rounded-lg overflow-hidden">
+            <button id="newChatBtn" class="w-full bg-blue-500 dark:bg-purple-500 hover:bg-blue-600 dark:hover:bg-purple-600 text-white font-bold py-2 px-4 rounded mb-4">
+                <i class="fas fa-plus mr-2"></i>New Chat
+            </button>
+            <div class="chat-history-container">
+                <div id="chatHistory" class="space-y-2">
+                    <!-- Chat history will be populated here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Main chat area -->
+        <div class="flex-1 flex flex-col">
+            <div class="flex justify-end mb-4">
+                <button id="darkModeToggle" class="p-2 rounded-full bg-gray-200 dark:bg-gray-600">
+                    <i class="fas fa-moon dark:text-purple-300"></i>
+                </button>
+            </div>
+            <div id="chatContainer" class="chat-container bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 mb-4 overflow-y-auto flex-1">
+                <!-- Chat messages will be appended here -->
+            </div>
+            <form id="chatForm" class="flex">
+                <input type="text" id="userPrompt" class="flex-grow mr-2 p-2 border border-gray-300 dark:border-gray-600 rounded-l-md bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200" placeholder="Type your message...">
+                <button type="submit" class="bg-blue-500 dark:bg-purple-500 hover:bg-blue-600 dark:hover:bg-purple-600 text-white font-bold py-2 px-4 rounded-r-md">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
